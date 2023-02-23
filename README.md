@@ -23,7 +23,7 @@ http.cors.enabled: true
 http.cors.allow-origin: "*"
 ```
 
-文件映射：
+把外面的配置文件映射进去：
 ```
 docker run -d --name elasticsearch --net elk -v /D/CodeProject/DockerTest/ELK/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:8.6.2
 ```
@@ -52,7 +52,7 @@ docker pull kibana:8.6.2
 ```
 docker run --name kibana --net elk -d -p 5601:5601 kibana:8.6.2
 ```
-把里面的配置文件映射出来
+把外面的配置文件映射进去
 ```
 docker run --name kibana --net elk -d -p 5601:5601 -v /D/CodeProject/DockerTest/ELK/kibana:/usr/share/kibana/config   kibana:8.6.2
 
@@ -79,19 +79,14 @@ docker volume create –name test-log
 8.6.* = 》7.17.x - 8.6.x
 
 docker pull logstash:8.6.2
-```
-docker run -d --name logstash --net elk -p 5044:5044 logstash:8.6.2
-```
-
-把里面的配置文件映射出来
-```
-
-
-```
-
 不映射：
 ```
 docker run -d --name logstash  --net elk  -p 5044:5044   logstash:8.6.2
+```
+
+把外面的配置文件映射进去（加上宿主机的文件log测试:-v ***:/home）：
+```
+docker run -d --name logstash  --net elk  -v /D/CodeProject/DockerTest/ELK/logstash/logstash.conf:/usr/share/logstash/logstash.conf  -p 5044:5044   logstash:8.6.2
 ```
 
 
