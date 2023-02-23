@@ -1,5 +1,5 @@
 
-# 目标
+# ELK 日志收集Docker安装记录
 平台：window 10
 
 版本： 8.6.X版本  
@@ -16,7 +16,7 @@
 docker pull elasticsearch:8.6.2
 ```
 
-elasticsearch.yml文件添加允许跨域访问
+elasticsearch.yml文件添加允许跨域访问(官方文档没有，不用加)
 ```
 http.cors.enabled: true
 
@@ -39,10 +39,6 @@ docker run -d --name elasticsearch --net elk  -p 9200:9200 -p 9300:9300 -e "disc
 ```
 docker insepct elasticsearch
 ```
-
-
-
-
 
 
 
