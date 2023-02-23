@@ -27,19 +27,11 @@ http.cors.allow-origin: "*"
 ```
 docker run -d --name elasticsearch --net elk -v /D/CodeProject/DockerTest/ELK/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:8.6.2
 ```
-不映射：
+不映射（亲测）：
 
-echo "http.cors.enabled: true" >> elasticsearch.yml
 ```
 docker run -d --name elasticsearch --net elk  -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:8.6.2
 ```
-
-
-查看容器IP:
-```
-docker insepct elasticsearch
-```
-
 
 
 ## kibana
@@ -57,13 +49,13 @@ docker run --name kibana --net elk -d -p 5601:5601 kibana:8.6.2
 docker run --name kibana --net elk -d -p 5601:5601 -v /D/CodeProject/DockerTest/ELK/kibana:/usr/share/kibana/config   kibana:8.6.2
 
 ```
-不映射：
+不映射（亲测）：
 
 ```
 docker run --name kibana --net elk -d -p 5601:5601    kibana:8.6.2
 
 ```
-修改文件：/usr/share/kibana/config/kibana.yml es的ip
+
 
 访问验证：kibanalocalhost:5601
 
@@ -79,7 +71,7 @@ docker volume create –name test-log
 8.6.* = 》7.17.x - 8.6.x
 
 docker pull logstash:8.6.2
-不映射：
+不映射（亲测）：
 ```
 docker run -d --name logstash  --net elk  -p 5044:5044   logstash:8.6.2
 ```
@@ -88,6 +80,7 @@ docker run -d --name logstash  --net elk  -p 5044:5044   logstash:8.6.2
 ```
 docker run -d --name logstash  --net elk  -v /D/CodeProject/DockerTest/ELK/logstash/logstash.conf:/usr/share/logstash/logstash.conf  -p 5044:5044   logstash:8.6.2
 ```
+(启动会出现日志成功连接es,但是返回不正常)
 
 
 # 启动UI，进入
